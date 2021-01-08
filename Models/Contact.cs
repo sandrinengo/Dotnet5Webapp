@@ -19,6 +19,6 @@ namespace Dotnet5Webapp.Models
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        public bool isActive { get; set; }//test
+        public bool isActive { get; set; } = true;
     }
 }
