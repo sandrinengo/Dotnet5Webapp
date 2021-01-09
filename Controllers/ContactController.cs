@@ -1,6 +1,5 @@
 ﻿using Dotnet5Webapp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,22 +22,28 @@ namespace Dotnet5Webapp.Controllers
         #region HttpVerbs
         // GET: api/<ContactController>
         [HttpGet]
-        public IEnumerable<Contact> Get()
+        public ActionResult<IEnumerable<Contact>> Get()
         {
             return contactList;
         }
 
         // GET api/<ContactController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Contact>> Get(int id)
         {
-            return "value";
+            Contact contact = await Task.Run(()=>contactList.FirstOrDefault(x=>x.ID==id));
+            if (contact == null)
+                return NotFound(new { Message = "Record has not been found"});
+            return Ok(contact);
         }
 
         // POST api/<ContactController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<IEnumerable<Contact>>> Post([FromBody] Contact model)
         {
+            await Task.Run(()=> contactList.Add(model));
+
+            return contactList;
         }
 
         // PUT api/<ContactController>/5
