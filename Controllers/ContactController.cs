@@ -48,8 +48,16 @@ namespace Dotnet5Webapp.Controllers
 
         // PUT api/<ContactController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<IEnumerable<Contact>>> Put(int id, [FromBody] Contact model)
         {
+            Contact contact = await Task.Run(()=>contactList.FirstOrDefault(x=>x.ID == id));
+            if (contact == null)
+                return NotFound();
+
+            contact.NickName = model.NickName;
+            contact.isActive = model.isActive;
+
+            return contactList;
         }
 
         // DELETE api/<ContactController>/5
