@@ -39,7 +39,7 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    projects: 'Dotnet5Webapp.csproj'
+    projects: 'src/DotnetWebapp/Dotnet5Webapp.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
 
