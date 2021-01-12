@@ -68,7 +68,7 @@ namespace Dotnet5Webapp.Controllers
             Contact contact = await Task.Run(() => contactList.FirstOrDefault(x => x.ID == id));
             if (contact == null)
                 return NotFound();
-
+            //comment
             contact.isActive = false;
 
             return contactList;
