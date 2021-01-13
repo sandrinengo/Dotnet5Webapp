@@ -62,7 +62,6 @@ namespace Dotnet5Webapp.Controllers
 
         // DELETE api/<ContactController>/5
         [HttpDelete("{id}")]
-        [Route("api/contact/delete")]
         public async Task<ActionResult<IEnumerable<Contact>>> Delete(int id)
         {
             Contact contact = await Task.Run(() => contactList.FirstOrDefault(x => x.ID == id));
